@@ -1,7 +1,5 @@
 import Blockly from "blockly";
-export const INITIAL_XML =
-    '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>';
-console.log(11);
+export const INITIAL_XML = '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>';
 export const INITIAL_TOOLBOX_JSON = {
     kind: "categoryToolbox",
     contents: [

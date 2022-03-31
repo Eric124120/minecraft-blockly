@@ -177,7 +177,6 @@ function setupTheCode(code: any) {
         setupCode = setupCode + code + "\n";
     }
 }
-console.log(2222);
 function instantiateVariable(variableName: any) {
     var found = false;
     if (variableName.indexOf("exports.") > -1) {
