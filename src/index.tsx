@@ -1,9 +1,9 @@
-import React from 'react';
-import * as ReactDOMClient from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+import * as ReactDOMClient from "react-dom/client";
+import "./index.css";
+import App from "./App";
 // import reportWebVitals from './reportWebVitals';
-const container: any = document.getElementById('root');
+const container: any = document.getElementById("root");
 const root = ReactDOMClient.createRoot(container);
 root.render(<App />);
 

@@ -1,17 +1,33 @@
 {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.tabWidth": 4, // 缩进字节数
     "[javascript]": {
-        "editor.defaultFormatter": null,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.codeActionsOnSave": {
             "source.fixAll.eslint": true
-        }
+        },
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "editor.formatOnSave": true
     },
     "[javascriptreact]": {
-        "editor.defaultFormatter": null,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.codeActionsOnSave": {
             "source.fixAll.eslint": true
-        }
-        // "editor.formatOnSave": true
+        },
+        "editor.formatOnSave": true
     },
     "editor.formatOnSave": true
 }
