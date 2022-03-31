@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Blockly from "blockly";
 import "./customBlocks/custom_Blocks";
 import 'blockly/python';
@@ -7,7 +7,6 @@ import './customBlocks/codeGenerator';
 import { BlocklyWorkspace } from "react-blockly";
 import {INITIAL_XML, INITIAL_TOOLBOX_JSON} from './customBlocks/initContent';
 import './App.css';
-console.log(Blockly.JavaScript)
 function App() {
     const [xml, setXml] = useState('');
     const [javascriptCode, setJavascriptCode] = useState('');
@@ -20,6 +19,7 @@ function App() {
             console.log(err);
         }
     }, [xml]);
+
     return (
         <div className="App">
             <BlocklyWorkspace
