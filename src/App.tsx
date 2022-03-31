@@ -8,6 +8,7 @@ import { BlocklyWorkspace } from "react-blockly";
 import {
     INITIAL_XML,
     INITIAL_TOOLBOX_JSON,
+    MEDIA_PATH,
 } from "./libs/customBlocks/initContent";
 import "./App.css";
 
@@ -37,6 +38,16 @@ function App() {
                         colour: "#ccc",
                         snap: true,
                     },
+                    zoom: {
+                        controls: true,
+                        wheel: true,
+                        startScale: 1.0,
+                        maxScale: 2,
+                        minScale: 0.5,
+                        scaleSpeed: 1.2,
+                    },
+                    media: MEDIA_PATH,
+                    trashcan: true,
                 }}
                 onWorkspaceChange={workspaceDidChange}
                 onXmlChange={setXml}
