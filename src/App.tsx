@@ -12,7 +12,7 @@ import {
     INITIAL_TOOLBOX_JSON,
     MEDIA_PATH,
 } from "./libs/customBlocks/initContent";
-
+import constantAppTabPane from "./libs/constants/appTabPane";
 import { savaProject, loadProjectXmlAsync } from "./libs/helpers/project";
 import "antd/dist/antd.css";
 import "./App.css";
@@ -24,22 +24,48 @@ function App() {
     const [javascriptCode, setJavascriptCode] = useState("");
     const workspaceInstance = useRef(null);
 
+    const getJavaScriptCode = () => {
+        if (!workspaceInstance.current) return javascriptCode;
+        const code = Blockly.JavaScript.workspaceToCode(
+            workspaceInstance.current
+        );
+        return code;
+    };
+
     const workspaceDidChange = useCallback((workspace: any) => {
         try {
-            const code = Blockly.JavaScript.workspaceToCode(workspace);
-            setJavascriptCode(code);
+            // workspace change handle
         } catch (err) {
             console.log(err);
         }
     }, []);
 
-    const selectTabHandle = useCallback((key: string) => {
-        console.log(key);
-    }, []);
+    const selectTabHandle = (key: string) => {
+        switch (key) {
+            case constantAppTabPane.XML: {
+                console.log(key);
+                break;
+            }
+            case constantAppTabPane.Blockly: {
+                console.log(key);
+                break;
+            }
+            case constantAppTabPane.JavaScript: {
+                const jsCode = getJavaScriptCode();
+                setJavascriptCode(jsCode);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    };
 
-    const saveProjectClick = useCallback(() => {
-        savaProject(xml, javascriptCode);
-    }, [xml, javascriptCode]);
+    const saveProjectClick = () => {
+        const jsCode = getJavaScriptCode();
+        setJavascriptCode(jsCode);
+        savaProject(xml, jsCode);
+    };
 
     const loadProjectHandle = useCallback(async (content: Blob) => {
         const projectXml = await loadProjectXmlAsync(content);
@@ -48,7 +74,6 @@ function App() {
             const xmlDom = Blockly.Xml.textToDom(projectXml);
             Blockly.Xml.domToWorkspace(xmlDom, workspaceInstance.current);
         }
-        console.log(projectXml);
     }, []);
 
     const injectHandle = useCallback((workspace: any) => {
@@ -73,8 +98,14 @@ function App() {
                     save
                 </Button>
             </div>
-            <Tabs defaultActiveKey="1" onChange={selectTabHandle}>
-                <TabPane tab="Blockly" key="1">
+            <Tabs
+                defaultActiveKey={constantAppTabPane.Blockly}
+                onChange={selectTabHandle}
+            >
+                <TabPane
+                    tab={constantAppTabPane.Blockly}
+                    key={constantAppTabPane.Blockly}
+                >
                     <BlocklyWorkspace
                         toolboxConfiguration={INITIAL_TOOLBOX_JSON}
                         initialXml={INITIAL_XML}
@@ -103,10 +134,16 @@ function App() {
                         onInject={injectHandle}
                     />
                 </TabPane>
-                <TabPane tab="JavaScript" key="2">
+                <TabPane
+                    tab={constantAppTabPane.JavaScript}
+                    key={constantAppTabPane.JavaScript}
+                >
                     <pre className="prettyprint">{javascriptCode}</pre>
                 </TabPane>
-                <TabPane tab="Xml" key="3">
+                <TabPane
+                    tab={constantAppTabPane.XML}
+                    key={constantAppTabPane.XML}
+                >
                     <pre className="prettyprint">{xml}</pre>
                 </TabPane>
             </Tabs>
