@@ -1,4 +1,5 @@
 import JSZip from "jszip";
+import { message } from "antd";
 
 export const downloadFile = (path: string) => {
     const linkInstance = document.createElement("a");
@@ -42,8 +43,10 @@ export const loadProjectXmlAsync = async (content: Blob) => {
         const data = await zip.loadAsync(content);
         const xmlFile = data.files["project.xml"];
         const xmlStr = await xmlFile.async("text");
+        message.success("导入成功");
         return xmlStr;
     } catch (err) {
+        message.error("导入失败");
         throw Error("加载失败");
     }
 };

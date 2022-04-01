@@ -43,7 +43,12 @@ function App() {
 
     const loadProjectHandle = useCallback(async (content: Blob) => {
         const projectXml = await loadProjectXmlAsync(content);
-        console.log(workspaceInstance.current);
+        setXml(xmlFormatter(projectXml));
+        if (workspaceInstance.current) {
+            const xmlDom = Blockly.Xml.textToDom(projectXml);
+            Blockly.Xml.domToWorkspace(xmlDom, workspaceInstance.current);
+        }
+        console.log(projectXml);
     }, []);
 
     const injectHandle = useCallback((workspace: any) => {
@@ -57,7 +62,11 @@ function App() {
     return (
         <div className="app-container">
             <div className="action-container">
-                <Upload accept=".zip" beforeUpload={loadProjectHandle}>
+                <Upload
+                    showUploadList={false}
+                    accept=".zip"
+                    beforeUpload={loadProjectHandle}
+                >
                     <Button type="primary">load project</Button>
                 </Upload>
                 <Button type="primary" onClick={saveProjectClick}>
@@ -87,6 +96,7 @@ function App() {
                             },
                             media: MEDIA_PATH,
                             trashcan: true,
+                            scrollbars: true,
                         }}
                         onWorkspaceChange={workspaceDidChange}
                         onXmlChange={xmlChangeHandle}
