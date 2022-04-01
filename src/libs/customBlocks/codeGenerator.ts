@@ -2294,6 +2294,8 @@ Blockly.JavaScript["scriptcraftfunction"] = function (block: Blockly.Block) {
     var first = true;
     code = showInstantiations(code, params);
     code = code + functionCode + "};\n";
+    // 导出方法
+    code = `${code} exports.${functionName} = ${functionName};\n`;
     return code;
 };
 
