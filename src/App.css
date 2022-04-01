@@ -1,3 +1,15 @@
+.app-container {
+    margin: 10px;
+}
+.app-container .action-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+}
+.app-container .action-container button {
+    margin-left: 10px;
+}
 .fill-height {
-  height: calc(100vh - 114px);
+    height: calc(100vh - 114px);
 }
