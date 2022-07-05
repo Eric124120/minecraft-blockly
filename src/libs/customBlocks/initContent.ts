@@ -1,7 +1,7 @@
 import Blockly from "blockly";
 export const INITIAL_XML = '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>';
 export const MEDIA_PATH =
-    "https://match-ide.pipacoding.com/cdn/minecraft_blockly/";
+    "";
 export const INITIAL_TOOLBOX_JSON = {
     kind: "categoryToolbox",
     contents: [
